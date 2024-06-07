@@ -5,5 +5,7 @@ const prompots = require('prompts');
         type: 'text',
         name: 'value',
         message: 'Select '
+        
+        
     })
 })();
