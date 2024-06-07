@@ -36,37 +36,71 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 var prompots = require('prompts');
-// Rock, Paper, Scissors
-// Rock > Scisssors
-// Paper > Rock
-// Scissors > Paper
-var ELEMENT_PAPER = 'paper';
-var ELEMENT_ROCK = 'rock';
-var ELEMENT_SCISSORS = 'scissors';
+var ELEMENT_PAPER = {
+    title: 'Paper',
+    beats: [],
+};
+var ELEMENT_ROCK = {
+    title: 'Rock',
+    beats: [],
+};
+var ELEMENT_SCISSORS = {
+    title: 'Scissors',
+    beats: [],
+};
+var ELEMENT_LIZARD = {
+    title: 'Lizard',
+    beats: [],
+};
+var ELEMENT_SPOCK = {
+    title: 'Spock',
+    beats: [],
+};
+var ELEMENT_DYNAMITE = {
+    title: 'Dynamite',
+    beats: [],
+};
+ELEMENT_PAPER.beats.push(ELEMENT_ROCK, ELEMENT_SPOCK);
+ELEMENT_ROCK.beats.push(ELEMENT_SCISSORS, ELEMENT_LIZARD);
+ELEMENT_SCISSORS.beats.push(ELEMENT_PAPER, ELEMENT_LIZARD);
+ELEMENT_LIZARD.beats.push(ELEMENT_PAPER, ELEMENT_SPOCK);
+ELEMENT_SPOCK.beats.push(ELEMENT_ROCK, ELEMENT_SCISSORS);
+ELEMENT_DYNAMITE.beats.push(ELEMENT_ROCK, ELEMENT_SCISSORS, ELEMENT_SPOCK, ELEMENT_PAPER, ELEMENT_LIZARD);
 var ELEMENTS = [
     ELEMENT_PAPER,
     ELEMENT_ROCK,
-    ELEMENT_SCISSORS
+    ELEMENT_SCISSORS,
+    ELEMENT_LIZARD,
+    ELEMENT_SPOCK,
+    ELEMENT_DYNAMITE
 ];
 (function () { return __awaiter(_this, void 0, void 0, function () {
-    var PC_SELECTION, response;
+    var PC_SELECTION, response, PLAYER_SELECTION;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 PC_SELECTION = ELEMENTS[(Math.floor(Math.random() * ELEMENTS.length))];
-                console.log(PC_SELECTION);
                 return [4 /*yield*/, prompots({
                         type: 'select',
-                        name: 'value',
+                        name: 'selectedElement',
                         message: 'Select your element: ',
-                        choices: [
-                            { title: 'Rock', value: ELEMENT_ROCK },
-                            { title: 'Paper', value: ELEMENT_PAPER },
-                            { title: 'Scissors', value: ELEMENT_SCISSORS }
-                        ]
+                        choices: ELEMENTS
                     })];
             case 1:
                 response = _a.sent();
+                PLAYER_SELECTION = ELEMENTS[response.selectedElement];
+                // console.log(PLAYER_SELECTION)
+                if (PC_SELECTION.title == PLAYER_SELECTION.title) {
+                    console.log("It's a draw!");
+                }
+                else {
+                    if (PLAYER_SELECTION.beats.includes(PC_SELECTION)) {
+                        console.log("PC had " + PC_SELECTION.title + "! Player won!");
+                    }
+                    else {
+                        console.log("PC had " + PC_SELECTION.title + "! PC won!");
+                    }
+                }
                 return [2 /*return*/];
         }
     });
