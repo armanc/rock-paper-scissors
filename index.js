@@ -36,15 +36,35 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 var prompots = require('prompts');
+// Rock, Paper, Scissors
+// Rock > Scisssors
+// Paper > Rock
+// Scissors > Paper
+var ELEMENT_PAPER = 'paper';
+var ELEMENT_ROCK = 'rock';
+var ELEMENT_SCISSORS = 'scissors';
+var ELEMENTS = [
+    ELEMENT_PAPER,
+    ELEMENT_ROCK,
+    ELEMENT_SCISSORS
+];
 (function () { return __awaiter(_this, void 0, void 0, function () {
-    var response;
+    var PC_SELECTION, response;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, prompots({
-                    type: 'text',
-                    name: 'value',
-                    message: 'sdfsd'
-                })];
+            case 0:
+                PC_SELECTION = ELEMENTS[(Math.floor(Math.random() * ELEMENTS.length))];
+                console.log(PC_SELECTION);
+                return [4 /*yield*/, prompots({
+                        type: 'select',
+                        name: 'value',
+                        message: 'Select your element: ',
+                        choices: [
+                            { title: 'Rock', value: ELEMENT_ROCK },
+                            { title: 'Paper', value: ELEMENT_PAPER },
+                            { title: 'Scissors', value: ELEMENT_SCISSORS }
+                        ]
+                    })];
             case 1:
                 response = _a.sent();
                 return [2 /*return*/];
